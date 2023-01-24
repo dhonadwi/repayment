@@ -53,6 +53,19 @@ const general = {
       'Restruktur Covid',
     ],
     [
+      '4',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '21,448,039.12',
+      '0.00',
+      '21,448,039.12',
+      'Lunas',
+      'Restruktur Covid',
+    ],
+    [
       'Total',
       '349,609,325.64',
       '3,496,093.25',
@@ -105,7 +118,7 @@ const sisa = {
       '0.00',
       '0.00',
       '0.00',
-      '15,000.00',
+      '24,000.00',
       'Sisa Kewajiban',
     ],
     [
@@ -147,10 +160,29 @@ const sisa = {
       'Sisa Kewajiban',
     ],
     [
+      '5',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '0.00',
+      '12,000.00',
+      '100.00',
+      '0.00',
+      '0.00',
+      '12,000.00',
+      'Sisa Kewajiban',
+    ],
+    [
       'Total',
-      '10,000.00',
+      '30,000.00',
       '79.98',
-      '5,0000.00',
+      '9,0000.00',
       '100.00',
       '0.00',
       '0.00',
@@ -158,11 +190,11 @@ const sisa = {
       '100.00',
       '0.00',
       '0.00',
-      '8,000.00',
+      '20,000.00',
       '100.00',
       '0.00',
       '0.00',
-      '73,000.00',
+      '109,000.00',
       '-',
     ],
   ],
@@ -376,6 +408,15 @@ const hitung = (nominal) => {
   // ==========================================
   const hasilPokok = hitungPokok(nominal, pokok, nilaiPokok, pembagiPokok);
   sisa = hasilPokok.sisa;
+  // kolom tunggakan fasilitas bunga
+  // ==========================================
+  const hasilFasBunga = hitungPokok(
+    sisa,
+    fasBunga,
+    nilaiFasBunga,
+    pembagiFasBunga
+  );
+  sisa = hasilFasBunga.sisa;
   // kolom tunggakan bunga
   // ==========================================
   const hasilTgkBunga = hitungPokok(
@@ -394,15 +435,6 @@ const hitung = (nominal) => {
     pembagiTgkDenda
   );
   sisa = hasilTgkDenda.sisa;
-  // kolom tunggakan fasilitas bunga
-  // ==========================================
-  const hasilFasBunga = hitungPokok(
-    sisa,
-    fasBunga,
-    nilaiFasBunga,
-    pembagiFasBunga
-  );
-  sisa = hasilFasBunga.sisa;
   // kolom tunggakan Fasilitas Denda
   // ==========================================
   const hasilFasDenda = hitungPokok(
@@ -543,6 +575,8 @@ const hitung = (nominal) => {
     .clear()
     .rows.add(newDataaCutloss)
     .draw();
+  document.querySelector('#hidden_cutloss').value = newDataaCutloss;
+  console.log(newDataaCutloss);
 };
 
 document.querySelector('#nominal').addEventListener('change', function () {
